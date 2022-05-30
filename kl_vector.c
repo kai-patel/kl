@@ -2,7 +2,7 @@
 
 #include "kl_vector.h"
 
-bool kl_vector_resize(struct kl_vector* vec, uint32_t capacity) {
+static bool kl_vector_resize(struct kl_vector* vec, uint32_t capacity) {
     void** items = realloc(vec->items, sizeof(void*) * capacity);
     if (items != NULL) {
         vec->items = items;
@@ -12,7 +12,7 @@ bool kl_vector_resize(struct kl_vector* vec, uint32_t capacity) {
     return true;
 }
 
-bool kl_vector_add(struct kl_vector* vec, void* i) {
+static bool kl_vector_add(struct kl_vector* vec, void* i) {
     if (vec->length == vec->capacity) {
         if(kl_vector_resize(vec, vec->capacity * 2)) return true;
     }
@@ -20,7 +20,7 @@ bool kl_vector_add(struct kl_vector* vec, void* i) {
     return false;
 }
 
-void kl_vector_free(struct kl_vector* vec) {
+static void kl_vector_free(struct kl_vector* vec) {
     free(vec->items);
     free(vec);
 }
