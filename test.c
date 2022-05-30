@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <inttypes.h>
 #include "kl_vector.h"
 
 int main(void) {
@@ -13,7 +14,7 @@ int main(void) {
     for (size_t i = 0; i < vec->length; i++) {
         printf("%d\n", *(int*)(vec->items[i]));
     }
-    printf("Length: %lu\n", (unsigned long) vec->length);
+    printf("Length: %" PRIu32 "\n", vec->length);
     vec->free(vec);
     return 0;
 }
