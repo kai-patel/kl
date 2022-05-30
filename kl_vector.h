@@ -13,12 +13,9 @@ typedef struct kl_vector {
     uint32_t length;
     bool (*add)(struct kl_vector*, void*);
     void (*free)(struct kl_vector*);
+    bool (*resize)(struct kl_vector*, uint32_t);
 } kl_vector;
 
-bool kl_vector_init(kl_vector*);
 kl_vector* kl_vector_new(void);
-bool kl_vector_resize(kl_vector*, uint32_t);
-bool kl_vector_add(struct kl_vector*, void*);
-void kl_vector_free(struct kl_vector*);
 
 #endif
