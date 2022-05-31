@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include "kl_vector.h"
-#include "kl_btree.h"
+#include "kl_bstree.h"
 
 bool compare(const void* a, const void* b) {
     return *((int*) a) < *((int*) b) ? false : true;
 }
 
-void print_tree(kl_btree* tree, uint8_t indent) {
+void print_tree(kl_bstree* tree, uint8_t indent) {
     if (tree == NULL) return;
     for (uint8_t i = 0; i < indent; i++)
         printf(" ");
@@ -34,11 +34,11 @@ int main(void) {
     printf("Length: %" PRIu32 "\n", vec->length);
     vec->free(vec);
 
-    // Binary Tree Testing
+    // Binary Search Tree Testing
     int* root_val = (int*) malloc(sizeof(int));
     *root_val = 4;
 
-    kl_btree* tree = kl_btree_new((void*) root_val);
+    kl_bstree* tree = kl_bstree_new((void*) root_val);
     printf("Initial Root: %d\n", *(int*) tree->value);
 
     for (int i = 0; i < 8; i++) {
