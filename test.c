@@ -4,8 +4,8 @@
 #include "kl_vector.h"
 #include "kl_bstree.h"
 
-bool compare(const void* a, const void* b) {
-    return *((int*) a) < *((int*) b) ? false : true;
+int compare(const void* a, const void* b) {
+    return *((int*) a) - *((int*) b);
 }
 
 void print_tree(kl_bstree* tree, uint8_t indent) {
