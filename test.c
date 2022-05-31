@@ -86,6 +86,14 @@ int main(void) {
     kl_llist_node* found_node = llist->find(llist, (void*) val_to_find, compare);
     printf("Found: %d @ %p\n", *(int*) found_node->value, (void*) found_node);
     printf("Expected: 2 @ %p\n", (void*) llist->head->next);
+
+    llist->reverse(llist);
+
+    curr = llist->head;
+    while (curr != NULL) {
+        printf("%d\n", *(int*) curr->value);
+        curr = curr->next;
+    }
     
     llist->free(llist);
     return 0;
