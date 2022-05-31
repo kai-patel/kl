@@ -8,7 +8,7 @@ typedef struct kl_llist_node {
 
 typedef struct kl_llist {
     kl_llist_node* head;
-    kl_llist_node* (*find)(struct kl_llist*);
+    kl_llist_node* (*find)(struct kl_llist*, void*, int (*) (const void*, const void*));
     void (*reverse)(struct kl_llist*);
     void (*add)(struct kl_llist*, void*);
     void (*free)(struct kl_llist*);

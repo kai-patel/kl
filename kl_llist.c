@@ -12,8 +12,16 @@ static kl_llist_node* kl_llist_node_new(void* i) {
     node->next = NULL;
     return node;
 }
-static kl_llist_node* kl_llist_find(struct kl_llist* llist) {
-    assert(0 && "Not implemented");
+static kl_llist_node* kl_llist_find(struct kl_llist* llist, void* i, int (*compare) (const void*, const void*)) {
+    kl_llist_node* curr = llist->head;
+
+    while (curr) {
+        if (compare(i, curr->value) == 0) {
+            return curr;
+        }
+        curr = curr->next;
+    }
+
     return NULL;
 }
 static void kl_llist_reverse(struct kl_llist* llist) {
@@ -32,7 +40,16 @@ static void kl_llist_add(struct kl_llist* llist, void* i) {
     curr->next = kl_llist_node_new(i);
 }
 static void kl_llist_free(struct kl_llist* llist) {
-    assert(0 && "Not implemented");
+    kl_llist_node* tmp;
+    kl_llist_node* head = llist->head;
+
+    while (llist->head != NULL) {
+        tmp = head;
+        head = head->next;
+        free(tmp);
+    }
+
+    free(llist);
 }
 
 void kl_llist_init(kl_llist* llist) {
