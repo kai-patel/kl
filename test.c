@@ -3,6 +3,7 @@
 #include <inttypes.h>
 #include "kl_vector.h"
 #include "kl_bstree.h"
+#include "kl_llist.h"
 
 int compare(const void* a, const void* b) {
     return *((int*) a) - *((int*) b);
@@ -63,7 +64,22 @@ int main(void) {
     kl_bstree* found = tree->find(tree, (void*) val_to_find, compare);
     printf("Found: %d @ %p\n", *(int*) found->value, (void*) found);
     printf("Expected: 5 @ %p\n", (void*) tree->right);
-
     tree->free(tree);
+
+    // Singly Linked List Testing
+    kl_llist* llist = kl_llist_new();
+
+    for (int i = 0; i < 16; i++) {
+        int* new_val = (int*) malloc(sizeof(int));
+        *new_val = i+1;
+        llist->add(llist, (void*) new_val);
+    }
+
+    kl_llist_node* curr = llist->head;
+    while (curr != NULL) {
+        printf("%d\n", *(int*) curr->value);
+        curr = curr->next;
+    }
+
     return 0;
 }

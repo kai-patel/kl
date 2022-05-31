@@ -14,6 +14,6 @@ typedef struct kl_llist {
     void (*free)(struct kl_llist*);
 } kl_llist;
 
-kl_llist* kl_llist_new(void*);
+kl_llist* kl_llist_new(void);
 
 #endif
