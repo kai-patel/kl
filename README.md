@@ -2,9 +2,10 @@
 
 **Kai's Library**
 
-## Partial Implemented
+## Partially Implemented
 - Vectors
 - Binary Search Trees
+- Singly Linked Lists
 
 ## TODO
 
