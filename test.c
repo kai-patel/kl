@@ -57,6 +57,13 @@ int main(void) {
            (void*) tree->left,
            (void*) tree->right
            );
+
+    int* val_to_find = (int*) malloc(sizeof(int));
+    *val_to_find = 5;
+    kl_bstree* found = tree->find(tree, (void*) val_to_find, compare);
+    printf("Found: %d @ %p\n", *(int*) found->value, (void*) found);
+    printf("Expected: 5 @ %p\n", (void*) tree->right);
+
     tree->free(tree);
     return 0;
 }
