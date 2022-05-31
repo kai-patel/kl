@@ -7,10 +7,11 @@ typedef struct kl_btree {
     void* value;
     struct kl_btree* left;
     struct kl_btree* right;
-    bool (*add)(struct kl_btree*, void*, bool (*)(const void*, const void*));
+    struct kl_btree* (*add)(struct kl_btree*, void*, bool (*)(const void*, const void*));
+    void (*free)(struct kl_btree*);
 
 } kl_btree;
 
-kl_btree* kl_btree_new(void);
+kl_btree* kl_btree_new(void*);
 
 #endif
