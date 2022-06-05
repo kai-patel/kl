@@ -12,6 +12,8 @@ typedef struct kl_llist {
     void (*reverse)(struct kl_llist*);
     void (*add)(struct kl_llist*, void*);
     void (*free)(struct kl_llist*);
+    void (*delete_p)(struct kl_llist*, void*); // Delete-by-pointer
+    void (*delete_v)(struct kl_llist*, void*, int (*) (const void*, const void*)); // Delete-by-value
 } kl_llist;
 
 kl_llist* kl_llist_new(void);

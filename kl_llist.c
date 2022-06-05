@@ -24,6 +24,7 @@ static kl_llist_node* kl_llist_find(struct kl_llist* llist, void* i, int (*compa
 
     return NULL;
 }
+
 static void kl_llist_reverse(struct kl_llist* llist) {
     kl_llist_node* prev = NULL;
     kl_llist_node* curr = llist->head;
@@ -38,6 +39,45 @@ static void kl_llist_reverse(struct kl_llist* llist) {
 
     llist->head = prev;
 }
+
+static void kl_llist_delete_p(struct kl_llist* llist, void* i) {
+    kl_llist_node* curr = llist->head;
+    kl_llist_node* prev = NULL;
+
+    while (curr != NULL) {
+        if (curr->value == i) {
+            if (prev != NULL) {
+                prev->next = curr->next;
+            } else {
+                llist->head = NULL;
+            }
+            return;
+        }
+            
+        prev = curr;
+        curr = curr->next;
+    }
+}
+
+static void kl_llist_delete_v(struct kl_llist* llist, void* i, int (*compare) (const void* a, const void* b)) {
+    kl_llist_node* curr = llist->head;
+    kl_llist_node* prev = NULL;
+
+    while (curr != NULL) {
+        if (compare(i, curr->value) == 0) {
+            if (prev != NULL) {
+                prev->next = curr->next;
+            } else {
+                llist->head = NULL;
+            }
+            return;
+        }
+            
+        prev = curr;
+        curr = curr->next;
+    }
+}
+
 static void kl_llist_add(struct kl_llist* llist, void* i) {
     if (llist->head == NULL) {
         llist->head = kl_llist_node_new(i);
@@ -50,6 +90,7 @@ static void kl_llist_add(struct kl_llist* llist, void* i) {
     }
     curr->next = kl_llist_node_new(i);
 }
+
 static void kl_llist_free(struct kl_llist* llist) {
     kl_llist_node* tmp;
     kl_llist_node* head = llist->head;
@@ -69,6 +110,8 @@ void kl_llist_init(kl_llist* llist) {
     llist->reverse = &kl_llist_reverse;
     llist->add = &kl_llist_add;
     llist->free = &kl_llist_free;
+    llist->delete_p = &kl_llist_delete_p;
+    llist->delete_v = &kl_llist_delete_v;
 }
 
 kl_llist* kl_llist_new(void) {
