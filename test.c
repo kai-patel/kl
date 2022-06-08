@@ -24,7 +24,7 @@ int main(void) {
     kl_vector* vec = kl_vector_new();
     if (vec == NULL) fprintf(stderr, "Error creating vector!\n");
     for (int i = 0; i < 1024; i++) {
-        int* item = (int*) malloc(sizeof(int));
+        int* item = malloc(sizeof(int));
         if (item != NULL) *item = i+1;
         vec->add(vec, (void*) item);
     }
@@ -36,14 +36,14 @@ int main(void) {
     vec->free(vec);
 
     // Binary Search Tree Testing
-    int* root_val = (int*) malloc(sizeof(int));
+    int* root_val = malloc(sizeof(int));
     *root_val = 4;
 
     kl_bstree* tree = kl_bstree_new((void*) root_val);
     printf("Initial Root: %d\n", *(int*) tree->value);
 
     for (int i = 0; i < 8; i++) {
-        int* new_val = (int*) malloc(sizeof(int));
+        int* new_val = malloc(sizeof(int));
         *new_val = i+1;
         if (i != 3)
             tree->add(tree, new_val, compare);
@@ -59,7 +59,7 @@ int main(void) {
            (void*) tree->right
            );
 
-    int* val_to_find = (int*) malloc(sizeof(int));
+    int* val_to_find = malloc(sizeof(int));
     *val_to_find = 5;
     kl_bstree* found = tree->find(tree, (void*) val_to_find, compare);
     printf("Found: %d @ %p\n", *(int*) found->value, (void*) found);
@@ -70,7 +70,7 @@ int main(void) {
     kl_llist* llist = kl_llist_new();
 
     for (int i = 0; i < 16; i++) {
-        int* new_val = (int*) malloc(sizeof(int));
+        int* new_val = malloc(sizeof(int));
         *new_val = i+1;
         llist->add(llist, (void*) new_val);
     }
