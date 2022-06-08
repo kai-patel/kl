@@ -39,7 +39,7 @@ static bool kl_vector_init(kl_vector* vec) {
 }
 
 kl_vector* kl_vector_new(void) {
-    kl_vector* vec = (kl_vector*) malloc(sizeof(kl_vector));
+    kl_vector* vec = malloc(sizeof(kl_vector));
     bool res = kl_vector_init(vec);
     if (res) return NULL;
     return vec;

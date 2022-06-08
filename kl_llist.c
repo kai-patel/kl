@@ -3,7 +3,7 @@
 #include "kl_llist.h"
 
 static kl_llist_node* kl_llist_node_new(void* i) {
-    kl_llist_node* node = (kl_llist_node*) malloc(sizeof(kl_llist_node));
+    kl_llist_node* node = malloc(sizeof(kl_llist_node));
     if (node == NULL) {
         perror("llist_node_new");
         return NULL;
@@ -115,7 +115,7 @@ void kl_llist_init(kl_llist* llist) {
 }
 
 kl_llist* kl_llist_new(void) {
-    kl_llist* llist = (kl_llist*) malloc(sizeof(kl_llist));
+    kl_llist* llist = malloc(sizeof(kl_llist));
     if (llist == NULL) perror("llist_new");
     kl_llist_init(llist);
     return llist;
