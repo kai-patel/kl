@@ -3,7 +3,7 @@
 #include "kl_vector.h"
 
 static bool kl_vector_resize(struct kl_vector* vec, uint32_t capacity) {
-    void** items = realloc(vec->items, sizeof(void*) * capacity);
+    void** items = realloc(vec->items, sizeof(*vec->items) * capacity);
     if (items != NULL) {
         vec->items = items;
         vec->capacity = capacity;
@@ -28,7 +28,7 @@ static void kl_vector_free(struct kl_vector* vec) {
 static bool kl_vector_init(kl_vector* vec) {
     vec->capacity = KL_INTERNAL_VECTOR_INITIAL_CAPACITY;
     vec->length = 0;
-    vec->items = malloc(sizeof(void*) * vec->capacity);
+    vec->items = malloc(sizeof(*vec->items) * vec->capacity);
     vec->add = &kl_vector_add;
     vec->free = &kl_vector_free;
     vec->resize = &kl_vector_resize;
@@ -39,7 +39,7 @@ static bool kl_vector_init(kl_vector* vec) {
 }
 
 kl_vector* kl_vector_new(void) {
-    kl_vector* vec = malloc(sizeof(kl_vector));
+    kl_vector* vec = malloc(sizeof(*vec));
     bool res = kl_vector_init(vec);
     if (res) return NULL;
     return vec;

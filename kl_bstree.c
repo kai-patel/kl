@@ -48,7 +48,7 @@ static kl_bstree* kl_bstree_init(kl_bstree* tree, void* val) {
 }
 
 kl_bstree* kl_bstree_new(void* val) {
-    kl_bstree* tree = malloc(sizeof(kl_bstree));
+    kl_bstree* tree = malloc(sizeof(*tree));
     if (tree == NULL) perror("new");
     return kl_bstree_init(tree, val);
 }
