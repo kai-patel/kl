@@ -88,6 +88,7 @@ int main(void) {
     printf("Expected: 2 @ %p\n", (void*) llist->head->next);
 
     llist->reverse(llist);
+    llist->delete_v(llist, (void*) val_to_find, compare);
 
     curr = llist->head;
     while (curr != NULL) {
